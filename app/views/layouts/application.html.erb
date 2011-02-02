@@ -18,7 +18,7 @@
 
   </script>
   <%= javascript_include_tag 'application' %>
-  <%= javascript_include_tag  'em_websocket' %>
+  <%= javascript_include_tag 'em_chat.js' %>
   <title>Chat system  <%=raw ((yield(:title) || "Untitled")) %></title>
   <%= yield :head %>
   <%= csrf_meta_tag %>
@@ -51,7 +51,7 @@
     </div>
     <div class="header-row"></div>
     <div id="main_header">
-      <div class="header-content">Rails Tech</div>
+      <div class="header-content">Em Websocket Chat Demo ..... Railstech</div>
       <div id="main_nav" style="float:right;padding-right:10px;">
         <ul>
           <li class="active_class" id="home"><%= link_to "Home", root_url,:class=>active_class %></li>
