@@ -1,0 +1,121 @@
+<% content_for :head do  %>
+    <style type="text/css">
+        #controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 0.5em;
+            display: block;
+        }
+
+        #message {width: 80%;}
+
+        #log {
+            font-family: helvetica, arial, sans-serif;
+            font-size: .8em;
+            padding-bottom: 40px;
+        }
+    </style>
+<% end  %>
+<div id="log"></div>
+<div id="controls">
+  <hr />
+  <input type="text" id="message"/>
+  <input type="button" value="send" id="sendbtn" disabled="disabled">
+  <input type="button" value="connect" id="connect">
+  <input type="button" value="disconnect" id="disconnect" disabled="disabled">
+</div>
+<% content_for :sidebar do %>
+    <ul>
+      <% @active_users.each do |user|%>
+        <li id="<%=  user.id %>" class="connect_to_chat" ><%= user.email %></li>
+      <% end  %>
+    </ul>
+<% end %>
+<script type="text/javascript">
+  $(".connect_to_chat").live("click",function(){
+      alert("ss");
+     //$(this)
+  });
+    var conn;
+    $(function(){
+        var history = [], idx = 0;
+        $("#message").focus();
+
+        $(window).bind("focus", function(){
+            $("#message").focus();
+        });
+
+        var logpanel = $("#log");
+
+        function sendmsg(){
+            if(conn && conn.readyState == 1){
+                var msg = $("#message").val();
+                history.unshift(msg);
+                conn.send(msg);
+                idx = 0;
+                $("#message").val("");
+            }
+        };
+
+        $("#log").bind('click', function(){
+            $("#message").focus()
+        });
+
+        $("#sendbtn").bind("click", function(){
+            sendmsg();
+            $("#message").focus()
+        });
+
+        $("#message").bind("keydown", function(e){
+            if(e.which == 13){
+                sendmsg();
+            }
+        });
+
+        $("#connect").bind("click", function(){
+            connect()
+        });
+
+        $("#disconnect").bind("click", function(){
+            conn.close()
+        });
+
+        function scrollToBottom() {
+            window.scrollBy(0, document.body.scrollHeight - document.body.scrollTop);
+        };
+
+        function log(data){
+            logpanel.append("<p>"+data+"</p>");
+            scrollToBottom();
+        };
+
+        function connect(){
+            if (window["WebSocket"]) {
+                conn = new WebSocket("ws://" + "10.0.2.16" + ":8000" );
+
+                conn.onmessage = function(evt) {
+                    log(evt.data);
+                };
+
+                conn.onclose = function() {
+                    log("** you have been disconnected");
+                    $("#sendbtn, #disconnect").attr("disabled","disabled");
+                    $("#connect").removeAttr("disabled");
+                };
+
+                conn.onopen = function(){
+                    log("** you have been connected");
+                    $("#sendbtn, #disconnect").removeAttr("disabled");
+                    $("#connect").attr("disabled","disabled");
+                    $("#message").focus()
+                }
+            }
+        };
+
+
+    });
+</script>
+

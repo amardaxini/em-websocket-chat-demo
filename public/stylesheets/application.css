@@ -1,0 +1,190 @@
+body {
+    background-color: #66634c;
+    font-family: "Lucida Grande","Lucida Sans Unicode",Verdana, Helvetica, Arial,sans-serif;
+    text-align: center;
+}
+
+/* header contents */
+.header{
+    -webkit-box-shadow: 0 1px 7px #000;
+    -moz-box-shadow: 0 1px 7px  #000;
+    box-shadow:  0 1px 7px #000;
+}
+#login_header{
+    background-color:#2f4a53;
+    height:35px;
+}
+#login_bar_right{
+    padding-top:7px;
+}
+#login_bar_right ul{
+    list-style:none;
+}
+#login_bar_right ul li{
+    display:inline;
+}
+#login_bar_right ul li a{
+
+    color:#7aaaa8;
+    text-decoration:none;
+}
+#login_bar_right ul li a:hover{
+    color:#fff;
+}
+#login_bar_right ul li a:active{
+    color:#fff;
+}
+.header-row{
+    height:5px;
+    background-color:#ddd;
+    margin:0;
+/*border:solid #ddd 7px*/
+}
+#main_header{
+/*background-color:#4f9fa3;*/
+/*background-color: #b2bfbf;*/
+/*background-color: #a2cad3;*/
+    background-color: #a2cfc9;
+/*background-color: #9FBACD;*/
+    height:100px;
+
+}
+#main_header .header-content{
+    height:70px;
+/*color:#ffffff;*/
+    margin:0 10px;
+    font-size:29px;
+
+
+
+}
+#main_nav{
+    float:right;
+/*padding-right:10px;*/
+}
+#main_nav ul{
+    list-style:none;
+}
+#main_nav ul li{
+    display:inline;
+    margin-left: 5px;
+
+}
+#main_nav ul li a{
+    display:block;
+    float:left;
+    margin:-10px 4px 0 4px;
+    padding:10px;
+    color:white;
+    font-size:12px;
+    font-weight:bold;
+    text-decoration:none;
+    background-color: #7c82b3;
+    
+}
+#main_nav ul li a{
+   -moz-border-radius-topleft: 10px;
+   -moz-border-radius-topright: 10px;
+    border-top-left-radius: 10px 10px;
+    border-top-right-radius: 10px 10px; 
+}
+
+#main_nav ul li a:hover,#main_nav ul li.active a{
+    font-weight:bold;
+    /*background-color:#323024;*/
+    background-color: #3e4040;
+
+}
+
+
+
+/* Sub Nav CSS */
+#sub_nav{
+    height:30px;
+ /*background-color:#323024;*/
+    background-color: #3e4040;
+    color:#8a847c;
+    margin:-2px;
+
+}
+
+#content{
+
+}
+div#content form.data-form {
+    margin: 0;
+    padding: 0 20px 20px 20px;
+}
+
+
+div#content form.data-form p, div#content form.data-form div { margin:0; padding: 10px 0 0 0;}
+
+div#content form.data-form input[type=text],
+div#content form.data-form textarea,
+div#content form.data-form input[type=password]
+{
+    padding: 3px;
+    font-size: 1.05em;
+    color: #444;
+}
+div#content form.data-form input[type=text],div#content form.data-form input[type=password]{  width: 50%;height:25px; }
+div#content form.data-form textarea { width: 98%; height: 80px; }
+
+div#content form.data-form input[type=submit] {
+    font-size: 1.2em;
+    padding: 10px;
+    border-top    : 1px solid #BBB;
+    border-left   : 1px solid #BBB;
+    border-right  : 1px solid #666;
+    border-bottom : 1px solid #666;
+    background-color: #DDD;
+}
+
+#sidebar{
+
+}
+/* Footer Content CSS */
+{
+margin:0;
+}
+html, body {
+    height: 100%;
+}
+
+div.every-thing {
+
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+
+    -webkit-box-shadow: 6px 0px 15px 3px #222,-6px 0px 15px 3px #222;
+    -moz-box-shadow: 6px 0px 15px 3px #222,-6px 0px 15px 3px #222;
+    box-shadow: 6px 0px 15px 3px #222,-6px 0px 15px 3px #222;
+    margin: 0 auto -38px ; /* the bottom margin is the negative value of the footer's height */
+    background-color:#eefeff;
+/*border:solid red 1px;*/
+
+}
+
+div#footer,div.push {
+    height: 30px; /* .push must be the same height as .footer */
+}
+div#footer{
+
+    background-color:#2f4a53;
+    color:#7aaaa8;
+    padding-left:10px;
+
+}
+div#footer p{
+    margin: 0;
+
+}
+.footer-row{
+
+    background-color:#ddd;
+    height:8px;
+}
+div#footer p,div#footer a{
+    color:#7aaaa8;
+}

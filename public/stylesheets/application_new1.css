@@ -1,0 +1,77 @@
+body {
+      background-color:#4d4b3e;
+    font-family: "Lucida Grande","Lucida Sans Unicode",Verdana, Helvetica, Arial,sans-serif;
+    text-align: center;
+}
+
+/* header contents */
+.header{
+}
+#login-header{
+    background-color:#2f4a53;
+    height:25px;
+}
+#login-bar-right{
+}
+#login-bar-right ul{
+    list-style:none;
+}
+#login-bar-right ul li{
+    display:inline;
+}
+#login-bar-right ul li a{
+    color:#7aaaa8;
+    text-decoration:none;
+}
+#login-bar-right ul li a:hover{
+   color:#fff;
+}
+#login-bar-right ul li a:active{
+   color:#fff;
+}
+#main-header{
+    background-color:#476f77;
+    height:100px;
+
+}
+#main-header .header-content{
+    height:70px;
+    color:white;
+    border:solid red 1px;
+}
+#main-nav ul{
+    list-style:none;
+}
+#main-nav ul li{
+    display:inline;
+}
+
+#main-nav ul li a{
+    padding:10px;
+    color:#000;
+    font-size:12px;
+    text-decoration:none;
+
+}
+#main-nav ul li a:hover{
+  font-weight:bold;
+  background-color:#323024;
+}
+#main-nav ul li.active a{
+  font-weight:bold;
+  /*background-color:#323024; */
+   background-color:#e8e8e8;
+}
+
+/* Main Content CSS */
+#sub-nav{
+    height:30px;
+    /*background-color:#323024;*/
+    background-color:#e8e8e8;
+}
+#content{
+    background-color:#dde;
+}
+#footer-wrapper{
+    footer-wrapper
+}

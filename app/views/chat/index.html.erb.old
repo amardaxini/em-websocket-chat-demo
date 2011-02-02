@@ -1,0 +1,144 @@
+<% content_for :head do  %>
+    <%= javascript_include_tag 'jquery.ui.chatbox' %>
+    <%= javascript_include_tag 'em_web_socket' %>
+    <!--<script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>-->
+    <style type="text/css">
+        /* CSS Document */
+        #wrapper, #loginform {
+            margin:10px;
+            padding-bottom:25px;
+            background:#EBF4FB;
+            width:504px;
+            border:1px solid #ACD8F0; }
+        #chatbox {
+            text-align:left;
+            margin:10px;
+            padding:10px;
+            background:#fff;
+            height:270px;
+            width:430px;
+            border:1px solid #ACD8F0;
+            overflow:auto;
+        }
+        #usermsg {
+            width:395px;
+            margin-left:10px;
+            border:1px solid #ACD8F0; }
+        #menu { padding:12.5px 25px 12.5px 25px; }
+        .welcome { float:left; }
+        .logout { float:right; }
+    </style>
+<% end  %>
+<!--<div id="log"></div>-->
+<!--<div id="wrapper">-->
+<!--<div id="menu">-->
+<!--<p class="welcome">Welcome, <b></b></p>-->
+<!--<p class="logout"><a id="exit" href="#">Exit Chat</a></p>-->
+<!--<div style="clear:both"></div>-->
+<!--</div>-->
+
+<!--<div id="chatbox"></div>-->
+
+
+<!--<%#= text_field_tag( 'usermsg', '', { :size => 63, :id => 'usermsg'} ) %>-->
+<!--<%#= submit_tag "Send",:id=>"send" %>-->
+
+<!--<ul id="chat_data" style="list-style:none"></ul>-->
+<!--</div>-->
+dd
+<div id="chat_div"></div>
+<div id="logp"></div>
+<% content_for :sidebar do %>
+    <ul>
+      <% @active_users.each do |user|%>
+          <div id="chat_<%=  user.id %>"></div>
+          <div id="chat_div_<%=  user.id %>"></div>
+          <li id="<%=  user.id %>" class="connect_to_chat" user_name="<%= user.email %>"><%= user.email %></li>
+      <% end  %>
+    </ul>
+<% end %>
+
+
+<script type="text/javascript">
+    //    var logpanel = $("#log");
+    $(document).ready(function(){
+        var history = [], idx = 0;
+        var counter = 0;
+        var gap =1;
+
+        function EmWebSocket(id)
+        {
+          this.logpanel = $("#"+id);
+            conne = this.connect(this);
+
+        }
+        EmWebSocket.fn = EmWebSocket.prototype;
+
+        function logg(em,data){
+          
+            $("#logp").append("<p>"+data+"</p>");
+             em.logpanel.append(data);
+            //scrollToBottom();
+        };
+
+        EmWebSocket.fn.scrollToBottom=function() {
+            window.scrollBy(0, document.body.scrollHeight - document.body.scrollTop);
+        };
+        EmWebSocket.fn.connect = function(obj){
+            var conn;
+            if (window["WebSocket"]) {
+
+                conn = new WebSocket("ws://10.0.2.15:8080" );
+                conn.onmessage = function(evt) {
+                    logg(obj,evt.data);
+                };
+                conn.onclose = function() {
+                    logg(obj,"** you have been disconnected");
+                };
+                conn.onopen = function(){
+
+                    logg(obj,"** you have been connected");
+
+                }
+            }
+            return conn;
+        };
+
+        EmWebSocket.fn.sendmsg = function(msg){
+
+            if(conne && conne.readyState == 1){
+                history.unshift(msg);
+                conne.send(msg);
+                idx = 0;
+
+            }
+        };
+
+
+        $(".connect_to_chat").live("click",function(){
+            // to create
+            user_id = $(this).attr('id');
+            user_name =  $(this).attr('user_name');
+            chat_user_div= "chat_div_"+user_id;
+            ews = new EmWebSocket(chat_user_div);
+            gap =  counter*230;
+            counter++;
+      
+            $("#chat_div_"+user_id).chatbox({id : "chat_"+user_id,
+                title : user_name,
+                user : user_name,
+                hidden: false,
+                offset:gap,
+                width: 230,
+                messageSent: function(id, user, msg){
+                    this.boxManager.addMsg(user_name, msg);
+                    ews.sendmsg(msg);
+                },
+                boxClosed: function(id) { counter--;}
+            });
+            // to insert a message
+        });
+    });
+
+</script>
+

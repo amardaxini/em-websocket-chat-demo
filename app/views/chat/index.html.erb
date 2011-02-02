@@ -1,0 +1,66 @@
+<% content_for :head do  %>
+  <%= javascript_include_tag 'jquery.ui.chatbox' %>
+  
+  <!--<script src="http://localhost:8080/application.js" type="text/javascript" charset="utf-8"></script>-->
+ <% end  %>
+<div id="chat_div"></div>
+<div id="logp"></div>
+<% content_for :sidebar do %>
+  <ul>
+    <% @active_users.each do |user|%>
+      <div id="chat_<%=  user.id %>"></div>
+      <div id="chat_div_<%=  user.id %>"></div>
+      <li id="<%=  user.id %>" class="connect_to_chat" user_name="<%= user.email %>" name="<%= user.name %>"><%= user.email %></li>
+    <% end  %>
+  </ul>
+<% end %>
+
+
+<script type="text/javascript">
+  var logpanel = $("#logp");
+ 
+  //    $(document).ready(function(){
+  //        var counter = 0;
+  //        var gap =1;
+  //
+  //
+  //        $(".connect_to_chat").live("click",function(){
+  //            // to create
+  //            user_id = $(this).attr('id');
+  //            user_name =  $(this).attr('user_name');
+  //            chat_user_div= "chat_div_"+user_id;
+  //            ews = new EmWebSocket(chat_user_div,"<%#= current_user.id %>","<%#= current_user.email%>",user_id,user_name);
+  //            gap =  counter*230;
+  //            counter++;
+  //
+  //            $("#chat_div_"+user_id).chatbox({id : "chat_"+user_id,
+  //                title : user_name,
+  //                user : user_name,
+  //                hidden: false,
+  //                offset:gap,
+  //                width: 230,
+  //                messageSent: function(id, user, msg){
+  //                  //  this.boxManager.addMsg(user_name, msg);
+  //
+  //                    ews.sendmsg(ews,msg);
+  //                },
+  //                boxClosed: function(id) { counter--;}
+  //            });
+  //            // to insert a message
+  //        });
+  //    });
+  $(document).ready(function() {
+    chatboxmanager.init();
+
+    $(".connect_to_chat").live("click",function(){
+
+      var id         = "chat_div_"+$(this).attr("id");
+      var user_id    = $(this).attr("id");
+      var username   = $(this).attr("user_name");
+      var firstname  = $(this).attr("name");
+      var websocket  = new EmWebSocket(id,"<%= current_user.id %>","<%= current_user.email %>",user_id,username);
+      chatboxmanager.addBox(id,firstname,username,websocket);
+    });
+  })
+</script>
+
