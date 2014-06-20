@@ -1,48 +1,44 @@
-require 'rubygems'
+#/usr/bin/env ruby
+## Require rubygems lt  1.9
+if  RUBY_VERSION.to_f > 1.9
+	require 'rubygems'
+end	
 require 'eventmachine'
 require 'em-websocket'
-require 'ruby-debug'
 require 'json'
-#DB_ENV = 'development'
-#ActiveRecord::Base.establish_connection(YAML.load_file("em_db.yml")[DB_ENV])
-#class User < ActiveRecord::Base
-#  scope :active, where("current_sign_in_at >= ? ",340.minutes.ago) #(added 5.30 hr+10 minutes ago need to check)
-#  #named_scope
-#
-#end
-#module EventMachine
+
 module Chat
 	def init
 
 	end
-# create instance variable for 2 user set channel and queue
-# param1= 2,param=1
-# instance variable is @channel_1_2 = {"channel"=>Em::Channel.new,"queue"=>EM::Queue.new}
+	# create instance variable for 2 user set channel and queue
+	# param1= 2,param=1
+	# instance variable is @channel_1_2 = {"channel"=>Em::Channel.new,"queue"=>EM::Queue.new}
 	def create_channel(param1,param2)
-		param1,param2=arrange_caller_and_calee(param1,param2)
-		if instance_variable_get("@channel_#{param1}_#{param2}").nil?
-			instance_variable_set("@channel_#{param1}_#{param2}", {"channel"=>EM::Channel.new,"queue"=>EM::Queue.new})
-		end
+          param1,param2=arrange_caller_and_callee(param1,param2)
+	  if instance_variable_get("@channel_#{param1}_#{param2}").nil?
+	    instance_variable_set("@channel_#{param1}_#{param2}", {"channel"=>EM::Channel.new,"queue"=>EM::Queue.new})
+	  end
 	end
-# get instance variable
-# param=2,param=1
-# it will return nil if @channel_1_2 is not present otherwise it return instance variable	
+	# get instance variable
+	# param=2,param=1
+	# it will return nil if @channel_1_2 is not present otherwise it return instance variable	
 	def get_channel(param1,param2,ws)
-		param1,param2=arrange_caller_and_calee(param1,param2)
-		if instance_variable_get("@channel_#{param1}_#{param2}").nil?
-			#set_channel(param1,param2,ws)
-			return nil
-		end
-		instance_variable_get("@channel_#{param1}_#{param2}")
+	  param1,param2=arrange_caller_and_callee(param1,param2)
+	  return nil if instance_variable_get("@channel_#{param1}_#{param2}").nil?
+	  #set_channel(param1,param2,ws)
+	  #return nil
+	  #end
+	  instance_variable_get("@channel_#{param1}_#{param2}")
 	end
-#get instance variable and Subscribing channel
+	#get instance variable and Subscribing channel
 
 	def subscribe_channel(param1,param2,ws)
-		get_channel(param1,param2,ws)["channel"].subscribe{ |msg| ws.send msg}
+	  get_channel(param1,param2,ws)["channel"].subscribe{ |msg| ws.send msg}
 	end
-# create instance variable
-#	subscribe channel
-# return instance variable	
+	# create instance variable
+	#	subscribe channel
+	# return instance variable	
 	def set_channel(user_one_id,user_two_id,ws)
 		if user_one_id !=user_two_id
 			caller_id,calee_id = arrange_caller_and_calee(user_one_id,user_two_id)
