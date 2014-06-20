@@ -1,25 +1,43 @@
-It is an basic app for peer to peer chat using event machine and websocket
+It is an basic app for PUB/SUB application using EventMachine and Websocket
 
-You have to start server ruby em_chat.rb change location and port if you required
-Now change in public/javascripts/em_chat.js same as modified url and port
+==Step
+1. Install Dependency
+  `bundle install`
+  
+2. Start create your database 
+  `rake db:create && rake db:migrate`
 
-This is developed for understanding html5 websocket and event machine.
-In this there is some hack that connect if page is refresh
-Process flow
+3. Start Rails server 
+  `rails server`
+  
+4. Start Chat Server
+  `./script/em_chat
+  
 
-After login there is one default web socket connection is establish for notifying user or maintaining session
-It creates individual channel for each client
+== NOTE
+  Default port where em_chat run is `8080`  if you ever happen to change this please do make the necesary changes in
+  public/javascripts/em_chat.js
 
+== OTHERS
+    The app was developed for understanding html5 websocket and event machine.
+    In the process we came with some hack to fix some known issue like page refresh 
+    
+    Working
 
-If user wants to chat it just click on user list then channel is establish betwwn them
-if this user has active and channel is established
-then notification is send to other user and message sends in queue
-else
-then notification send to sender user is not active
-After acceptance of user whatever message in queue it push to all subscribe user
+    Once the User is logged in the a default web-socket connection is establish 
+    This connection only need is to notify users 
+    
+    If the users wish initiate a channel he/she can do this by clicking the list of active users
 
-Here i dont know how much is reliable on production environment but you can check it out on local
-and do changes as per requirement.
+    We started with this application with aim of understand html5 web-socket and we havent tested this on any of our
+    live project so we are unsure of how much reliable the application would be on heavy load
+    
+    If you every happen to test this on your live production site . We would love to hear on that
+    
+== Credits
+   Amar Daxini(https://github/amardaxini)
+   [Viren Negi](https://github/meetme2meat) 
+
 
 
 
