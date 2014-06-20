@@ -9,7 +9,8 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'thin'
 gem 'devise'
 gem 'json'
-
+gem 'eventmachine'
+gem 'em-websocket'
 # Use unicorn as the web server
 # gem 'unicorn'
 

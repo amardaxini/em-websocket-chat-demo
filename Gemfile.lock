@@ -38,9 +38,13 @@ GEM
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.1)
+    em-websocket (0.5.1)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0.6.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     eventmachine (1.0.3)
+    http_parser.rb (0.6.0)
     i18n (0.5.4)
     json (1.8.1)
     mail (2.2.20)
@@ -93,6 +97,8 @@ PLATFORMS
 
 DEPENDENCIES
   devise
+  em-websocket
+  eventmachine
   json
   rails (~> 3.0.1)
   sqlite3-ruby
