@@ -1,24 +1,33 @@
 It is an basic app for PUB/SUB application using EventMachine and Websocket
 
-==Step
+Step
+====
 1. Install Dependency
+
   `bundle install`
   
-2. Start create your database 
+2. Start creating your database 
+
   `rake db:create && rake db:migrate`
 
 3. Start Rails server 
+
   `rails server`
   
 4. Start Chat Server
-  `./script/em_chat
+ 
+  `./script/em_chat`
   
 
-== NOTE
+NOTE
+====
+
   Default port where em_chat run is `8080`  if you ever happen to change this please do make the necesary changes in
   public/javascripts/em_chat.js
 
-== OTHERS
+OTHERS
+======
+
     The app was developed for understanding html5 websocket and event machine.
     In the process we came with some hack to fix some known issue like page refresh 
     
@@ -34,8 +43,11 @@ It is an basic app for PUB/SUB application using EventMachine and Websocket
     
     If you every happen to test this on your live production site . We would love to hear on that
     
-== Credits
+Credits
+=======
+
    [Amar Daxini](https://github/amardaxini)
+   
    [Viren Negi](https://github/meetme2meat) 
 
 
