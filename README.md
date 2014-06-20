@@ -35,7 +35,7 @@ It is an basic app for PUB/SUB application using EventMachine and Websocket
     If you every happen to test this on your live production site . We would love to hear on that
     
 == Credits
-   Amar Daxini(https://github/amardaxini)
+   [Amar Daxini](https://github/amardaxini)
    [Viren Negi](https://github/meetme2meat) 
 
 
