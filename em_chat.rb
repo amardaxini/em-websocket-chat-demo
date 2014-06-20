@@ -78,7 +78,7 @@ module Chat
 	end
 	#swap caller,calee
 	def arrange_caller_and_calee(param1,param2)
-	  nil if param1 == param2
+	  return nil if param1 == param2
 	  [param1,param2].sort
 	end
 end
