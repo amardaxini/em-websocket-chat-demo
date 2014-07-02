@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 ## Require rubygems lt  1.9
-if  RUBY_VERSION.to_f > 1.9
+if  RUBY_VERSION.to_f < 1.9
   require 'rubygems'
 end	
 require 'eventmachine'
