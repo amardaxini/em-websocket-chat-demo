@@ -6,7 +6,7 @@ end
 require 'eventmachine'
 require 'em-websocket'
 require 'json'
-
+require 'pry'
 module Chat
 	def init
 
@@ -15,7 +15,7 @@ module Chat
 	# param1= 2,param=1
 	# instance variable is @channel_1_2 = {"channel"=>Em::Channel.new,"queue"=>EM::Queue.new}
 	def create_channel(param1,param2)
-          param1,param2=arrange_caller_and_callee(param1,param2)
+    param1,param2=arrange_caller_and_calee(param1,param2)
 	  if instance_variable_get("@channel_#{param1}_#{param2}").nil?
 	    instance_variable_set("@channel_#{param1}_#{param2}", {"channel"=>EM::Channel.new,"queue"=>EM::Queue.new})
 	  end
@@ -24,7 +24,7 @@ module Chat
 	# param=2,param=1
 	# it will return nil if @channel_1_2 is not present otherwise it return instance variable	
 	def get_channel(param1,param2,ws)
-	  param1,param2=arrange_caller_and_callee(param1,param2)
+	  param1,param2=arrange_caller_and_calee(param1,param2)
 	  return nil if instance_variable_get("@channel_#{param1}_#{param2}").nil?
 	  #set_channel(param1,param2,ws)
 	  #return nil
@@ -36,6 +36,7 @@ module Chat
 	def subscribe_channel(param1,param2,ws)
 	  get_channel(param1,param2,ws)["channel"].subscribe{ |msg| ws.send msg}
 	end
+
 	# create instance variable
 	#	subscribe channel
 	# return instance variable	
@@ -47,6 +48,7 @@ module Chat
 			get_channel(caller_id,calee_id ,ws)
 		end
 	end
+
 # set individual user channel	
 	def set_user_channel(user_one_id,ws)
 		create_user_channel(user_one_id)
